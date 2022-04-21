@@ -40,5 +40,18 @@ Bans member.
 `!faq`
 Configure AutoFAQ.
 
+`!poll`
+Poll explaination.
+
 ## AutoFAQ
 `I cannot be fucked to explain this just run !faq pls`
+
+## Poll
+`!poll [question]`
+Creates a yes or no poll.
+
+`!poll [question]; [option]; [option]; [option]...`
+Creates a poll with multiple responses. Up to 12.
+
+`!pollrole [role]`
+Sets role to ping when polls are created.
