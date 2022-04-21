@@ -10,12 +10,18 @@
 <p align="center"> A multipurpose Discord bot for AVAS.cc </p>
 
 # Features
-- Mute/Unmute, Ban
+- Mute/unmute, ban
 - Moderator action logging
-- AutoFAQ
+- Smart auto FAQ
+- Easy poll creation
 
-## Moderation Management
-robbybot checks command permissions against a list of chosen roles as opposed to member-specific permissions. This is to make adding and removing mods (and their permissions with this bot) easier to manage. Administrators must use !setmod [moderator role] to add a role to moderator list.
+## Moderation Permission Management
+robbybot checks command permissions against a list of chosen roles as opposed to member-specific permissions. This is to make adding and removing mods (and their permissions with this bot) easier to manage. Administrators must use `!setmod [moderator role]` to add a role to moderator list.
+
+## AutoFAQ
+robbybot AutoFAQ works with 2 components: a key:response entry, and a confidence value. Keys are keywords that relate to their corresponding response. For example, the `[keyword]` 'version' would have the `[response]` 'The server is version 1.18'.
+
+Whether or not the bot responds to a message is decided based on confidence and whether or not a key was heard. If the bot thinks the message was a question and hears a keyword, it will respond with that keyword's response.
 
 ## Admin commands
 `!setmod [role]`
@@ -38,13 +44,26 @@ Unmutes muted member.
 Bans member.
 
 `!faq`
-Configure AutoFAQ.
+AutoFAQ explaination.
 
 `!poll`
 Poll explaination.
 
 ## AutoFAQ
-`I cannot be fucked to explain this just run !faq pls`
+`!faq toggle`
+Toggles autoFAQ on/off.
+
+`!faq days [n]`
+Only responds to players with less than [n] days on the server.
+
+`!faq keys`
+Show current list of keywords the bot looks for to respond to.
+
+`!faq add [key] [response]`
+Add a new key:response entry. If the bot sees the `[key]` and has confidence its a question worth responding to, it will respond with `[response]`.
+
+`!faq remove [key]`
+Removes [key]:response entry.
 
 ## Poll
 `!poll [question]`
