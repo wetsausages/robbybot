@@ -63,7 +63,7 @@ Show current list of keywords the bot looks for to respond to.
 Add a new key:response entry. If the bot sees the `[key]` and has confidence its a question worth responding to, it will respond with `[response]`.
 
 `!faq remove [key]`
-Removes [key]:response entry.
+Removes key:response entry based on the key.
 
 ## Poll
 `!poll [question]`
