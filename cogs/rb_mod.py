@@ -22,9 +22,9 @@ class ModCog(commands.Cog):
 	async def mute(self, ctx, member:discord.Member, x=None):
 		with open(self.bot.path + '/data/' + str(ctx.guild.id) + '/data.cfg', 'r') as f: r = f.read()
 		cfg = json.loads(r)
+		await ctx.message.delete()
 
 		title = 'RB Mute'
-		await ctx.message.delete()
 		if await check_perm(self, ctx, ctx.author.roles, cfg['Main']['ModRoles']) is False: return
 		channel = self.bot.get_channel(cfg['Main']['ModLog'])
 		muted_role=discord.utils.get(ctx.guild.roles, name="Muted")
@@ -72,6 +72,7 @@ class ModCog(commands.Cog):
 		with open(self.bot.path + '/data/' + str(ctx.guild.id) + '/data.cfg', 'r') as f: r = f.read()
 		cfg = json.loads(r)
 		await ctx.message.delete()
+
 		if await check_perm(self, ctx, ctx.author.roles, cfg['Main']['ModRoles']) is False: return
 		channel = self.bot.get_channel(cfg['Main']['ModLog'])
 		muted_role=discord.utils.get(ctx.guild.roles, name="Muted")
@@ -88,6 +89,7 @@ class ModCog(commands.Cog):
 		with open(self.bot.path + '/data/' + str(ctx.guild.id) + '/data.cfg', 'r') as f: r = f.read()
 		cfg = json.loads(r)
 		await ctx.message.delete()
+
 		if await check_perm(self, ctx, ctx.author.roles, cfg['Main']['ModRoles']) is False: return
 		if x == None:
 			await build_embed(self, ctx, 'RB Ban', desc=f'Please provide a reason.', delete=5)
@@ -104,6 +106,7 @@ class ModCog(commands.Cog):
 		with open(self.bot.path + '/data/' + str(ctx.guild.id) + '/data.cfg', 'r') as f: r = f.read()
 		cfg = json.loads(r)
 		await ctx.message.delete()
+		
 		if await check_perm(self, ctx, ctx.author.roles, cfg['Main']['ModRoles']) is False: return
 		cfg['Main']['ModLog'] = ctx.channel.id
 		to_json = json.dumps(cfg, indent=4)
@@ -114,11 +117,11 @@ class ModCog(commands.Cog):
 
 	@commands.command()
 	async def faq(self, ctx, x=None, y=None):
+		await ctx.message.delete()
 		with open(self.bot.path + '/data/' + str(ctx.guild.id) + '/data.cfg', 'r') as f: r = f.read()
 		cfg = json.loads(r)
 		if await check_perm(self, ctx, ctx.author.roles, cfg['Main']['ModRoles']) is False: return
 			
-		await ctx.message.delete()
 		if x == None: await build_embed(self, ctx, 'RB FAQ Panel', 'Robbybot AutoFAQ works with 2 components: a key:response entry, and a confidence value. Keys are keywords that relate to their corresponding response. For example, the [keyword] \'version\' would have the [response] \'The server is version 1.18\'.\n\nWhether or not the bot responds to a message is decided based on confidence and whether or not a key was heard. If the bot thinks the message was a question *and* hears a keyword, it will respond with that keywords response.', ['!faq toggle|Toggles AutoFAQ on and off|false', '!faq days [n]|Only responds to players with less than n days on the server|false', '!faq keys|Show current list of keywords the bot looks for to respond to|false', '!faq add [key] [response]|Add a new key:response entry. If the bot sees the [keyword] and has confidence its a question worth responding to, it will respond with [response]|false', '!faq remove [key]|Removes key:response entry|false'])
 		elif x == 'toggle':
 			with open(self.bot.path + '/data/' + str(ctx.guild.id) + '/data.cfg', 'r') as f: r = f.read()
