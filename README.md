@@ -23,6 +23,7 @@ robbybot AutoFAQ works with 2 components: a key:response entry, and a confidence
 
 Whether or not the bot responds to a message is decided based on confidence and whether or not a key was heard. If the bot thinks the message was a question and hears a keyword, it will respond with that keyword's response.
 
+# Commands
 ## Admin commands
 `!setmod [role]`
 Adds selected role to list of moderator roles.
