@@ -24,41 +24,17 @@ class FAQCog(commands.Cog):
 		if len(message.content) > 0:
 			if message.content[0] == self.bot.command_prefix: return #if command
 		else: return #if image
-		
-		question_indicators = ['what', 'how', 'why', 'is', 'can', 'when', '?']
-		feels_good = ['join', 'server']
-		remove_words = ['a', 'an', 'the']
 
 		blocks = message.content.replace(',','.').replace(';','.').replace('-','.').split('.')
 		for block in blocks:
 			heard_key = None
-			question = False
-			confidence = 0
-			for char in block:
-				if char == '?':
-					confidence += .5
-			block = block.replace('?','')
-			block.rstrip()
+			block = block.replace('?', '')
 			chunks = block.split(' ')
-			for word in remove_words:
-				if word in chunks: chunks.remove(word)
 			for chunk in chunks:
 				chunk = chunk.lower()
 				if chunk in keyword.keys(): 
-					confidence += 1
-					heard_key = chunk
-				if chunk in question_indicators:
-					question = True
-					confidence +=1
-				if chunk in feels_good:
-					confidence += 1
-
-			print('[RB_AutoFAQ]Server: ' + message.guild.name + ' | Block:', '\'' + block + '\'', 'confidence:', confidence/len(chunks), 'key:', heard_key, 'question:', question)
-
-			if confidence >= 2.0: question = True
-			if heard_key == None: continue
-			if question == False: continue
-			if confidence/len(chunks) > .3: await build_embed(self, message, 'RB FAQ', desc=keyword.get(heard_key), footer=f'You\'ll stop recieving these tips in {((message.author.joined_at + datetime.timedelta(days=(int(max_days)))) - date.today()).days} days!', delete=5)
+					await build_embed(self, message, 'RB FAQ', desc=keyword.get(chunk), footer=f'You\'ll stop recieving these tips in {((message.author.joined_at + datetime.timedelta(days=(int(max_days)))) - date.today()).days} days!', delete=5)
+					return
 
 async def build_embed(self, message, title='', desc='', fields=[], footer='', delete=0):
 	colors = self.bot.colors
