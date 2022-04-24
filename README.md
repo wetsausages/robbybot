@@ -14,6 +14,7 @@
 - Moderator action logging
 - Smart auto FAQ
 - Easy poll creation
+- Reminders
 
 ## Moderation Permission Management
 robbybot checks command permissions against a list of chosen roles as opposed to member-specific permissions. This is to make adding and removing mods (and their permissions with this bot) easier to manage. Administrators must use `!setmod [moderator role]` to add a role to moderator list.
@@ -75,3 +76,9 @@ Creates a poll with multiple responses. Up to 12.
 
 `!pollrole [role]`
 Sets role to ping when polls are created.
+
+## Reminders
+`!remindme [duration] [text]`
+Sets a reminder message and a duration to wait before the bot pings you with the input message.
+Ex: `!remindme 12h fix the server`
+
